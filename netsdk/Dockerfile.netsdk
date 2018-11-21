@@ -1,0 +1,17 @@
+FROM microsoft/dotnet:2.1-sdk
+
+RUN apt-get update \ 
+    && apt-get install -y \ 
+       zip \ 
+       curl \ 
+       emacs-nox \ 
+       git \
+       htop \ 
+    && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /git
+RUN git clone https://github.com/jeremymeng/dotfiles.git dotfiles
+RUN ls -al .
+RUN find dotfiles -maxdepth 1 -type f
+RUN find dotfiles -maxdepth 1 -type f | xargs -I {} cp {} ~/
+
