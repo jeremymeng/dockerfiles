@@ -1,4 +1,4 @@
-FROM microsoft/dotnet:2.1-sdk AS builder
+FROM microsoft/dotnet:2.2-sdk AS builder
 WORKDIR /build
 COPY . .
 # Publish with `-r linux-x64` so that the runtime package that contains crossgen is downloaded
@@ -8,7 +8,7 @@ RUN cp `find ~/.nuget/packages/runtime.linux-x64.microsoft.netcore.app/ -name cr
 # Publish without `-r linux-x64` so shared framework from the runtime container is used
 RUN dotnet publish -c release -o /publish-output
 
-FROM microsoft/dotnet:2.1-runtime
+FROM microsoft/dotnet:2.2-aspnetcore-runtime
 WORKDIR /app
 COPY --from=builder /publish-output .
 

@@ -13,7 +13,7 @@ RUN apt-get update \
 #      strace \
 #      tcpdump \
 #      sysstat \
-      emacs-nox \
+       emacs-nox \
 #      vim \
        htop \
     && rm -rf /var/lib/apt/lists/*
